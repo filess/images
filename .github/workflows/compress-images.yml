@@ -21,8 +21,9 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           compressOnly: true
-      - name: Commit & Push changes
+      - name: Commit & Push Changes
         uses: actions-js/push@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: '[Automated] Optimize images'
 
