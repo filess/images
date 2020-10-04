@@ -1,0 +1,29 @@
+name: Compress Images
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '**.jpg'
+      - '**.jpeg'
+      - '**.png'
+      - '**.webp'
+
+jobs:
+  build:
+    
+  merge-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v2
+      - name: Compress Images
+        uses: calibreapp/image-actions@master
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
