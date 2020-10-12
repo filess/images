@@ -21,12 +21,23 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           compressOnly: true
-      - name: Commit files
+      - name: Commit Files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git commit -m "[Automated] Optimize images" -a
-      - name: Push changes
+      - name: Push Changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+  sync:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync To Gitee
+        uses: wearerequired/git-mirror-action@master
+        env:
+            SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
+        with:
+            source-repo: "git@github.com:filess/images.git"
+            destination-repo: "git@gitee.com:yanglbme/images.git"
