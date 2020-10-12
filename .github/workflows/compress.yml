@@ -1,4 +1,4 @@
-name: Compress Images
+name: Compress And Sync
 
 on:
   push:
