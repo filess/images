@@ -11,7 +11,7 @@ on:
       - '**.webp'
 
 jobs:
-  build:
+  compress:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Branch
@@ -31,7 +31,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
   sync:
-    needs: build
+    needs: compress
     runs-on: ubuntu-latest
     steps:
       - name: Sync To Gitee
